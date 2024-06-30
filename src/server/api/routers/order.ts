@@ -32,6 +32,32 @@ export const orderRouter = createTRPCRouter({
       });
     }),
 
+  checkout: protectedProcedure
+    .input(
+      z.array(MenuItemModel.extend({ quantity: z.number().int().default(1) })),
+    )
+    .mutation(async ({ ctx, input }) => {
+      return ctx.db.order.create({
+        data: {
+          user: {
+            connect: {
+              id: ctx.session.user.id,
+            },
+          },
+          orderItems: {
+            createMany: {
+              data: input.map((item) => {
+                return {
+                  quantity: item.quantity,
+                  menuItemId: item.id,
+                };
+              }),
+            },
+          },
+        },
+      });
+    }),
+
   myOrders: protectedProcedure.query(async ({ ctx }) => {
     return ctx.db.order.findMany({
       where: {
@@ -54,6 +80,24 @@ export const orderRouter = createTRPCRouter({
         where: {
           id: input.id,
           userId: ctx.session.user.id, // only allow user to delete their own orders
+        },
+      });
+    }),
+
+  getOrderById: protectedProcedure
+    .input(OrderModel.pick({ id: true }))
+    .query(async ({ ctx, input }) => {
+      return ctx.db.order.findFirst({
+        where: {
+          id: input.id,
+          userId: ctx.session.user.id, // only allow user to get their own orders
+        },
+        include: {
+          orderItems: {
+            include: {
+              menuItem: true,
+            },
+          },
         },
       });
     }),

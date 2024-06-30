@@ -5,10 +5,14 @@ import { Button } from "./ui/button";
 import { api } from "@/trpc/react";
 import { useToast } from "./ui/use-toast";
 import { useRouter } from "next/navigation";
+import { useStore } from "@/hooks/store";
+import { useCartStore } from "@/hooks/use-cart";
 
 export const MenuItemCard = ({ menuItem }: { menuItem: MenuItem }) => {
   const router = useRouter();
   const toast = useToast();
+
+  const sidebar = useStore(useCartStore, (state) => state);
 
   const orderNow = api.order.orderNow.useMutation({
     onSuccess: async () => {
@@ -34,6 +38,14 @@ export const MenuItemCard = ({ menuItem }: { menuItem: MenuItem }) => {
     await orderNow.mutateAsync(menuItem);
   };
 
+  const handleAddToCart = () => {
+    sidebar?.addItem(menuItem);
+    toast.toast({
+      title: "Item added to cart",
+      description: `${menuItem.name} has been added to cart`,
+    });
+  };
+
   return (
     <div
       key={menuItem.id}
@@ -57,7 +69,9 @@ export const MenuItemCard = ({ menuItem }: { menuItem: MenuItem }) => {
       </div>
       <div className="flex gap-3">
         <Button onClick={handleOrderNow}>Order now</Button>
-        <Button variant="secondary">Add to Cart</Button>
+        <Button onClick={handleAddToCart} variant="secondary">
+          Add to Cart
+        </Button>
       </div>
     </div>
   );
