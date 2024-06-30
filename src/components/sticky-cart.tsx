@@ -15,7 +15,7 @@ export const StickyCart = () => {
   // if no sidebar than take whole space default
   // also show the items on cart and ability to update the quantity of the items
   return (
-    <div className="fixed bottom-0 left-[300px] right-0 border-t border-gray-200 bg-white">
+    <div className="fixed bottom-0 left-[280px] right-0 rounded-md border-t border-gray-200 bg-white shadow-lg">
       <div className="flex items-center justify-between px-4 py-2">
         <div className="flex items-center gap-2">
           <span className="text-sm font-semibold">Total: $200</span>
