@@ -42,7 +42,6 @@ export default async function Dashboard() {
             </div>
           )}
         </div>
-        <StickyCart />
       </main>
     </DashLayout>
   );

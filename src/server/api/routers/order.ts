@@ -2,6 +2,7 @@ import { z } from "zod";
 
 import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc";
 import { MenuItemModel, OrderModel } from "prisma/zod";
+import { TRPCError } from "@trpc/server";
 
 export const orderRouter = createTRPCRouter({
   orderNow: protectedProcedure
@@ -34,9 +35,19 @@ export const orderRouter = createTRPCRouter({
 
   checkout: protectedProcedure
     .input(
-      z.array(MenuItemModel.extend({ quantity: z.number().int().default(1) })),
+      z.array(MenuItemModel.extend({ quantity: z.number().int().default(1) }), {
+        required_error: "at least one required",
+      }),
     )
     .mutation(async ({ ctx, input }) => {
+      // TODO: add this check to validation using zod
+      if (input.length === 0)
+        throw new TRPCError({
+          message: "No menu item in order",
+          cause: "zero menu item",
+          code: "BAD_REQUEST",
+        });
+
       return ctx.db.order.create({
         data: {
           user: {

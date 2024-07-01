@@ -14,7 +14,7 @@ import { useCartStore } from "@/hooks/use-cart";
 import { useStore } from "@/hooks/store";
 import { api } from "@/trpc/react";
 import { useToast } from "./ui/use-toast";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export const StickyCart = () => {
   // It is basically a card that sticks to the bottom of the screen
@@ -24,6 +24,7 @@ export const StickyCart = () => {
   // also show the items on cart and ability to update the quantity of the items
   const cartStore = useStore(useCartStore, (state) => state);
   const toast = useToast();
+  const router = useRouter();
 
   const totalPrice = cartStore?.items.reduce(
     (acc, curr) => acc + curr.price * curr.quantity,
@@ -38,7 +39,7 @@ export const StickyCart = () => {
         description: "Your order has been placed",
       });
       // redirect to orders page
-      redirect(`/dashboard/orders/${data.id}`);
+      return router.push(`/dashboard/orders/${data.id}`);
     },
     onError: (error) => {
       toast.toast({
@@ -65,10 +66,25 @@ export const StickyCart = () => {
           </div>
           <div className="flex gap-2">
             <Button variant="outline">View Cart</Button>
-            <Button onClick={() => cartStore?.clearCart()} variant="outline">
+            <Button
+              onClick={(e) => {
+                // Block the button click to propagate to link level
+                e.preventDefault();
+                cartStore?.clearCart();
+              }}
+              variant="outline"
+            >
               Clear Cart
             </Button>
-            <Button onClick={handleCheckout}>Checkout</Button>
+            <Button
+              onClick={(e) => {
+                e.preventDefault();
+                void handleCheckout();
+              }}
+              disabled={cartStore?.items.length === 0}
+            >
+              Checkout
+            </Button>
           </div>
         </div>
       </Link>

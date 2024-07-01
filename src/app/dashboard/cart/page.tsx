@@ -19,29 +19,27 @@ export default function CartPage() {
           <div className="space-y-3">
             {cartStore.items.map((item) => (
               <div
-                key={item.menuItem.id}
+                key={item.id}
                 className="flex items-center gap-2 rounded-md bg-gray-100 px-4 py-2"
               >
                 <img
-                  src={item.menuItem.thumbnail}
-                  alt={item.menuItem.name}
+                  src={item.thumbnail}
+                  alt={item.name}
                   className="h-16 w-16 rounded-lg"
                 />
                 <div className="flex flex-col">
-                  <span className="text-lg font-semibold">
-                    {item.menuItem.name}
-                  </span>
+                  <span className="text-lg font-semibold">{item.name}</span>
                   <span className="text-sm text-muted-foreground">
-                    {item.menuItem.description}
+                    {item.description}
                   </span>
                   <span className="text-sm font-semibold">
-                    ${item.menuItem.price} x {item.quantity} = $
-                    {item.menuItem.price * item.quantity}
+                    ${item.price} x {item.quantity} = $
+                    {item.price * item.quantity}
                   </span>
                   <div className="flex items-center gap-2">
                     <Button
                       onClick={() =>
-                        cartStore?.updateItem(item.menuItem, item.quantity - 1)
+                        cartStore?.updateItem(item, item.quantity - 1)
                       }
                       variant="outline"
                       className="p-2"
@@ -51,7 +49,7 @@ export default function CartPage() {
                     <span>{item.quantity}</span>
                     <Button
                       onClick={() =>
-                        cartStore?.updateItem(item.menuItem, item.quantity + 1)
+                        cartStore?.updateItem(item, item.quantity + 1)
                       }
                       variant="outline"
                       className="p-2"
