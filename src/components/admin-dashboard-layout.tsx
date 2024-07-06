@@ -58,7 +58,7 @@ export const AdminDashLayout = ({
               </Link>
               <Link
                 href="/admin/dashboard/menu"
-                className={`flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary ${path === "/admin/dashboard/menus" && "bg-muted text-primary"} `}
+                className={`flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary ${path === "/admin/dashboard/menu" || ("/admin/dashboard/menu/new" && "bg-muted text-primary")} `}
               >
                 <Menu className="h-4 w-4" />
                 Menu

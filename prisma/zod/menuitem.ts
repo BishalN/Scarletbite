@@ -1,17 +1,19 @@
-import * as z from "zod"
-import { CompleteOrderItem, RelatedOrderItemModel } from "./index"
+import * as z from "zod";
+import { type CompleteOrderItem, RelatedOrderItemModel } from "./index";
 
 export const MenuItemModel = z.object({
   id: z.number().int(),
   name: z.string(),
   description: z.string(),
-  price: z.number(),
+  // coerce to number
+  // TODO: extend this at another level since it is generated from prisma which will change again
+  price: z.coerce.number(),
   isAvailable: z.boolean(),
   thumbnail: z.string().nullish(),
-})
+});
 
 export interface CompleteMenuItem extends z.infer<typeof MenuItemModel> {
-  orders: CompleteOrderItem[]
+  orders: CompleteOrderItem[];
 }
 
 /**
@@ -19,6 +21,8 @@ export interface CompleteMenuItem extends z.infer<typeof MenuItemModel> {
  *
  * NOTE: Lazy required in case of potential circular dependencies within schema
  */
-export const RelatedMenuItemModel: z.ZodSchema<CompleteMenuItem> = z.lazy(() => MenuItemModel.extend({
-  orders: RelatedOrderItemModel.array(),
-}))
+export const RelatedMenuItemModel: z.ZodSchema<CompleteMenuItem> = z.lazy(() =>
+  MenuItemModel.extend({
+    orders: RelatedOrderItemModel.array(),
+  }),
+);
