@@ -57,6 +57,8 @@ export const MenuItemCard = ({ menuItem }: { menuItem: MenuItem }) => {
         <NextImage
           src={menuItem.thumbnail!}
           alt={menuItem.name}
+          width={64}
+          height={64}
           className="h-16 w-16 rounded-lg"
         />
         <div className="flex flex-col">

@@ -27,6 +27,8 @@ export default function CartPage() {
                 <NextImage
                   src={item.thumbnail!}
                   alt={item.name}
+                  width={64}
+                  height={64}
                   className="h-16 w-16 rounded-lg"
                 />
                 <div className="flex flex-col">

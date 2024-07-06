@@ -20,6 +20,8 @@ export const OrderItemCard = ({ order }: { order: CompleteOrder }) => {
           <NextImage
             src={order.orderItems[0]?.menuItem.thumbnail ?? "/food.jpg"}
             alt={order.orderItems[0]?.menuItem.name ?? "Order Item"}
+            width={64}
+            height={64}
             className="h-16 w-16 rounded-lg"
           />
           <div className="flex flex-col">
