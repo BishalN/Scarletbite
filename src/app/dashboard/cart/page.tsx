@@ -8,6 +8,8 @@ import { useCartStore } from "@/hooks/use-cart";
 import { MinusIcon, PlusIcon } from "lucide-react";
 import React from "react";
 
+import NextImage from "next/image";
+
 export default function CartPage() {
   const cartStore = useStore(useCartStore, (state) => state);
 
@@ -22,8 +24,8 @@ export default function CartPage() {
                 key={item.id}
                 className="flex items-center gap-2 rounded-md bg-gray-100 px-4 py-2"
               >
-                <img
-                  src={item.thumbnail}
+                <NextImage
+                  src={item.thumbnail!}
                   alt={item.name}
                   className="h-16 w-16 rounded-lg"
                 />

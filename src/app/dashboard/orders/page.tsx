@@ -1,10 +1,10 @@
 import { getServerAuthSession } from "@/server/auth";
 import { redirect, RedirectType } from "next/navigation";
 import { api } from "@/trpc/server";
-import { StickyCart } from "@/components/sticky-cart";
 import { OrderItemCard } from "@/components/order-item-card";
 import { DashLayout } from "@/components/dashboard-layout";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 // TODO: add the estimated delivery time to every menu item on model
 // TODO: also add the measurement quanity to the menu item model e.g plate for chowmein, glass for juice etc to create per plate or per glass price on ui
@@ -38,7 +38,9 @@ export default async function Dashboard() {
               <p className="text-sm text-muted-foreground">
                 You can start creating order by adding products to cart
               </p>
-              <Button className="mt-4">Go to my feed</Button>
+              <Link href="/dashboard">
+                <Button className="mt-4">Go to my feed</Button>
+              </Link>
             </div>
           )}
         </div>

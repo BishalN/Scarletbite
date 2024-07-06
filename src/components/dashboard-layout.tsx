@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { CircleUser, Home, Menu, Package2, ShoppingCart } from "lucide-react";
 
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -44,9 +43,6 @@ export const DashLayout = ({ children }: { children: React.ReactNode }) => {
               >
                 <ShoppingCart className="h-4 w-4" />
                 My Orders
-                <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
-                  6
-                </Badge>
               </Link>
             </nav>
           </div>
@@ -108,9 +104,6 @@ export const DashLayout = ({ children }: { children: React.ReactNode }) => {
                 >
                   <ShoppingCart className="h-5 w-5" />
                   My Orders
-                  <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
-                    6
-                  </Badge>
                 </Link>
               </nav>
               <div className="mt-auto">

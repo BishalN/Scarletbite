@@ -1,6 +1,9 @@
+import { CancelOrderButton } from "@/components/cancel-order-button";
 import { DashLayout } from "@/components/dashboard-layout";
 import { Button } from "@/components/ui/button";
 import { api } from "@/trpc/server";
+import Link from "next/link";
+import { notFound } from "next/navigation";
 import React from "react";
 
 // TODO: Add breadcrumbs
@@ -12,16 +15,21 @@ export default async function orderDetailsPage({
 }) {
   // get the order id from the route
   const order = await api.order.getOrderById({ id: +params.orderId });
+  if (!order) {
+    return notFound();
+  }
   return (
     <DashLayout>
       <div className="my-4 space-y-2 p-2">
-        <Button variant={"outline"}>Go Back</Button>
+        <Link href="/dashboard/orders">
+          <Button variant={"outline"}>Go Back</Button>
+        </Link>
         <h1 className="text-2xl font-bold">Order Details #{order?.id}</h1>
 
         <div className="flex flex-col">
           <div className="flex items-center justify-between">
             <h2 className="text-lg font-semibold">Order Items</h2>
-            <Button variant={"secondary"}>Cancel Order</Button>
+            <CancelOrderButton orderId={order.id} />
           </div>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             {order?.orderItems.map((orderItem) => (

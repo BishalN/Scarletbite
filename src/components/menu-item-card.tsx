@@ -8,6 +8,8 @@ import { useRouter } from "next/navigation";
 import { useStore } from "@/hooks/store";
 import { useCartStore } from "@/hooks/use-cart";
 
+import NextImage from "next/image";
+
 export const MenuItemCard = ({ menuItem }: { menuItem: MenuItem }) => {
   const router = useRouter();
   const toast = useToast();
@@ -52,8 +54,8 @@ export const MenuItemCard = ({ menuItem }: { menuItem: MenuItem }) => {
       className="flex flex-col gap-2 rounded-lg border p-4"
     >
       <div className="flex items-center gap-2">
-        <img
-          src={menuItem.thumbnail}
+        <NextImage
+          src={menuItem.thumbnail!}
           alt={menuItem.name}
           className="h-16 w-16 rounded-lg"
         />
