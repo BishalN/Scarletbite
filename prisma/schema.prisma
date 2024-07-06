@@ -111,8 +111,8 @@ model OrderItem {
 enum OrderStatus {
   PENDING
   PREPARING
-  READY
-  COMPLETED
+  READY // what is this ? not clear ready vs completed may be ready for pickup
+  COMPLETED // finished cooking now need to make it ready for pickup
   CANCELED
 }
 

@@ -109,6 +109,7 @@ export const orderRouter = createTRPCRouter({
               menuItem: true,
             },
           },
+          user: true,
         },
       });
     }),
