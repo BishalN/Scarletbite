@@ -4,14 +4,12 @@ import Link from "next/link";
 import {
   CircleUser,
   CogIcon,
-  Home,
   Menu,
   Package2,
   ShoppingCart,
   User,
 } from "lucide-react";
 
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -23,7 +21,9 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { usePathname } from "next/navigation";
+import { signOut } from "next-auth/react";
 
+// TODO: fix the moving while scrolling
 export const AdminDashLayout = ({
   children,
 }: {
@@ -87,10 +87,9 @@ export const AdminDashLayout = ({
               <DropdownMenuContent align="end">
                 <DropdownMenuLabel>My Account</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>Settings</DropdownMenuItem>
-                <DropdownMenuItem>Support</DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>Logout</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => signOut()}>
+                  Logout
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
@@ -119,21 +118,34 @@ export const AdminDashLayout = ({
                   <span className="sr-only">ScarleteeBite</span>
                 </Link>
                 <Link
-                  href="/dashboard"
-                  className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-                >
-                  <Home className="h-5 w-5" />
-                  My Feed
-                </Link>
-                <Link
-                  href="/dashboard/orders"
-                  className="mx-[-0.65rem] flex items-center gap-4 rounded-xl bg-muted px-3 py-2 text-foreground hover:text-foreground"
+                  href="/admin/dashboard"
+                  className={`mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground ${path === "/admin/dashboard" && "bg-muted text-primary"}`}
                 >
                   <ShoppingCart className="h-5 w-5" />
-                  My Orders
-                  <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
-                    6
-                  </Badge>
+                  Orders
+                </Link>
+                <Link
+                  href="/admin/dashboard/users"
+                  className={`mx-[-0.65rem] flex items-center gap-4 rounded-xl bg-muted px-3 py-2 text-foreground hover:text-foreground ${path === "/admin/dashboard/users" && "bg-muted text-primary"}`}
+                >
+                  <User className="h-5 w-5" />
+                  User
+                </Link>
+
+                <Link
+                  href="/admin/dashboard/menu"
+                  className={`mx-[-0.65rem] flex items-center gap-4 rounded-xl bg-muted px-3 py-2 text-foreground hover:text-foreground ${path === "/admin/dashboard/menu" && "bg-muted text-primary"}`}
+                >
+                  <Menu className="h-5 w-5" />
+                  Menu
+                </Link>
+
+                <Link
+                  href="/admin/dashboard/preferences"
+                  className={`mx-[-0.65rem] flex items-center gap-4 rounded-xl bg-muted px-3 py-2 text-foreground hover:text-foreground ${path === "/admin/dashboard/preferences" && "bg-muted text-primary"}`}
+                >
+                  <CogIcon className="h-5 w-5" />
+                  Store Preferences
                 </Link>
               </nav>
               <div className="mt-auto">
@@ -151,10 +163,9 @@ export const AdminDashLayout = ({
                   <DropdownMenuContent align="end">
                     <DropdownMenuLabel>My Account</DropdownMenuLabel>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem>Settings</DropdownMenuItem>
-                    <DropdownMenuItem>Support</DropdownMenuItem>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem>Logout</DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => signOut()}>
+                      Logout
+                    </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
               </div>
