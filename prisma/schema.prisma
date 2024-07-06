@@ -80,6 +80,7 @@ model VerificationToken {
     @@unique([identifier, token])
 }
 
+// TODO: add the measure for the menu item could be plate, cup, boul, gm, kg etc
 model MenuItem {
   id          Int       @id @default(autoincrement())
   name        String
@@ -126,5 +127,5 @@ model Preference {
   currency       String
   cashOnDelivery Boolean   @default(true)
   user           User      @relation(fields: [userId], references: [id])
-  userId         String       @unique
+  userId         String    @unique
 }

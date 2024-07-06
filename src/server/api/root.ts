@@ -5,6 +5,7 @@ import { orderRouter } from "./routers/order";
 import { adminOrderRouter } from "./routers/admin/order";
 import { adminUserRouter } from "./routers/admin/users";
 import { adminMenuRouter } from "./routers/admin/menu";
+import { adminPreferencesRouter } from "./routers/admin/preferences";
 
 /**
  * This is the primary router for your server.
@@ -15,9 +16,12 @@ export const appRouter = createTRPCRouter({
   post: postRouter,
   feed: feedRouter,
   order: orderRouter,
+
+  // Admin Routers
   adminOrder: adminOrderRouter,
   users: adminUserRouter,
   adminMenu: adminMenuRouter,
+  preferences: adminPreferencesRouter,
 });
 
 // export type definition of API
