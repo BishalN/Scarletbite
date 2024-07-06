@@ -1,4 +1,4 @@
-import { DashLayout } from "@/components/dashboard-layout";
+import { AdminDashLayout } from "@/components/admin-dashboard-layout";
 import { OrderUpdateButton } from "@/components/order-update-button";
 import { Button } from "@/components/ui/button";
 import { api } from "@/trpc/server";
@@ -13,7 +13,7 @@ export default async function orderDetailsPage({
   // get the order id from the route
   const order = await api.adminOrder.getOrderById({ id: +params.orderId });
   return (
-    <DashLayout>
+    <AdminDashLayout>
       <div className="my-4 space-y-2 p-2">
         <Button variant={"outline"}>Go Back</Button>
         <h1 className="text-2xl font-bold">Order Details #{order?.id}</h1>
@@ -72,6 +72,6 @@ export default async function orderDetailsPage({
           <span className="text-lg font-semibold">{order?.status}</span>
         </div>
       </div>
-    </DashLayout>
+    </AdminDashLayout>
   );
 }
