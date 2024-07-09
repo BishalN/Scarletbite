@@ -1,13 +1,5 @@
 "use client";
 
-// what we want is a cart that sticks at the bottom of the screen when we scroll
-// its gets its data from a internal data store that is persisted
-// we can add items to the cart and remove them
-// we can also change the quantity of the items
-// we can also place an order
-// we can also clear the cart
-// we can also view the cart
-
 import Link from "next/link";
 import { Button } from "./ui/button";
 import { useCartStore } from "@/hooks/use-cart";
@@ -17,11 +9,6 @@ import { useToast } from "./ui/use-toast";
 import { useRouter } from "next/navigation";
 
 export const StickyCart = () => {
-  // It is basically a card that sticks to the bottom of the screen
-  // if there are no items then hide the stickybar other wise show it
-  // if there is a sidebar then clip the right hand side to right side of the sidebar
-  // if no sidebar than take whole space default
-  // also show the items on cart and ability to update the quantity of the items
   const cartStore = useStore(useCartStore, (state) => state);
   const toast = useToast();
   const router = useRouter();

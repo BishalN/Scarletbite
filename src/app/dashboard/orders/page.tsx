@@ -8,6 +8,7 @@ import Link from "next/link";
 
 // TODO: add the estimated delivery time to every menu item on model
 // TODO: also add the measurement quanity to the menu item model e.g plate for chowmein, glass for juice etc to create per plate or per glass price on ui
+// TODO: add to cart should make add to cart button so that it has already added to cart
 
 export default async function Dashboard() {
   const session = await getServerAuthSession();
