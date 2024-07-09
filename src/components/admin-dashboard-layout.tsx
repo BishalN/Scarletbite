@@ -22,6 +22,7 @@ import {
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { usePathname } from "next/navigation";
 import { signOut } from "next-auth/react";
+import { api } from "@/trpc/react";
 
 // TODO: fix the moving while scrolling
 export const AdminDashLayout = ({
@@ -30,6 +31,8 @@ export const AdminDashLayout = ({
   children: React.ReactNode;
 }) => {
   const path = usePathname();
+  const currentUser = api.me.currentUser.useQuery();
+
   return (
     <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
       <div className="hidden border-r bg-muted/40 md:sticky md:top-0 md:block">
@@ -72,18 +75,28 @@ export const AdminDashLayout = ({
               </Link>
             </nav>
           </div>
-          <div className="mt-auto p-4">
+          <div className="mt-auto bg-gray-200 p-4">
             <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="secondary"
-                  size="icon"
-                  className="rounded-full"
-                >
-                  <CircleUser className="h-5 w-5" />
-                  <span className="sr-only">Toggle user menu</span>
-                </Button>
-              </DropdownMenuTrigger>
+              <div className="flex items-center justify-between">
+                <div>
+                  <h3 className="text-sm font-semibold">
+                    {currentUser.data?.name}
+                  </h3>
+                  <p className="text-xs text-muted-foreground">
+                    {currentUser.data?.email}
+                  </p>
+                </div>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="secondary"
+                    size="icon"
+                    className="rounded-full"
+                  >
+                    <CircleUser className="h-5 w-5" />
+                    <span className="sr-only">Toggle user menu</span>
+                  </Button>
+                </DropdownMenuTrigger>
+              </div>
               <DropdownMenuContent align="end">
                 <DropdownMenuLabel>My Account</DropdownMenuLabel>
                 <DropdownMenuSeparator />
@@ -148,18 +161,28 @@ export const AdminDashLayout = ({
                   Store Preferences
                 </Link>
               </nav>
-              <div className="mt-auto">
+              <div className="mt-auto bg-gray-200 p-4">
                 <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button
-                      variant="secondary"
-                      size="icon"
-                      className="rounded-full"
-                    >
-                      <CircleUser className="h-5 w-5" />
-                      <span className="sr-only">Toggle user menu</span>
-                    </Button>
-                  </DropdownMenuTrigger>
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h3 className="text-sm font-semibold">
+                        {currentUser.data?.name}
+                      </h3>
+                      <p className="text-xs text-muted-foreground">
+                        {currentUser.data?.email}
+                      </p>
+                    </div>
+                    <DropdownMenuTrigger asChild>
+                      <Button
+                        variant="secondary"
+                        size="icon"
+                        className="rounded-full"
+                      >
+                        <CircleUser className="h-5 w-5" />
+                        <span className="sr-only">Toggle user menu</span>
+                      </Button>
+                    </DropdownMenuTrigger>
+                  </div>
                   <DropdownMenuContent align="end">
                     <DropdownMenuLabel>My Account</DropdownMenuLabel>
                     <DropdownMenuSeparator />

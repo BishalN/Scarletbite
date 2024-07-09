@@ -12,19 +12,17 @@ import {
 } from "./ui/card";
 import { Icons } from "./ui/icons";
 
-export function CreateAccountCard() {
+export function AdminCreateAccountCard() {
   return (
     <Card>
       <CardHeader className="space-y-1">
-        <CardTitle className="text-2xl">Create an account or sign in</CardTitle>
-        <CardDescription>
-          Sign in with your Google or Discord account to continue.
-        </CardDescription>
+        <CardTitle className="text-2xl">Welcome to ScarletBite Admin</CardTitle>
+        <CardDescription>Sign in to your account to continue</CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col gap-3">
         <Button
           onClick={async () => {
-            await signIn("google", { callbackUrl: "/dashboard" });
+            await signIn("google", { callbackUrl: "/admin/dashboard" });
           }}
         >
           <Icons.google className="mr-2 h-4 w-4" />
@@ -33,7 +31,7 @@ export function CreateAccountCard() {
         <Button
           variant="outline"
           onClick={async () => {
-            await signIn("discord", { callbackUrl: "/dashboard" });
+            await signIn("discord", { callbackUrl: "/admin/dashboard" });
           }}
         >
           <Icons.discord className="mr-2 h-4 w-4" />

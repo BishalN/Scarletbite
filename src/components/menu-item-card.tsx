@@ -56,7 +56,7 @@ export const MenuItemCard = ({ menuItem }: { menuItem: MenuItem }) => {
       <div className="flex items-center gap-2">
         <NextImage
           src={menuItem.thumbnail!}
-          alt={menuItem.name}
+          alt={menuItem?.name}
           width={64}
           height={64}
           className="h-16 w-16 rounded-lg"

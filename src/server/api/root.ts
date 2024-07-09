@@ -1,4 +1,3 @@
-import { postRouter } from "@/server/api/routers/post";
 import { createCallerFactory, createTRPCRouter } from "@/server/api/trpc";
 import { feedRouter } from "./routers/feed";
 import { orderRouter } from "./routers/order";
@@ -6,6 +5,7 @@ import { adminOrderRouter } from "./routers/admin/order";
 import { adminUserRouter } from "./routers/admin/users";
 import { adminMenuRouter } from "./routers/admin/menu";
 import { adminPreferencesRouter } from "./routers/admin/preferences";
+import { meRouter } from "./routers/me";
 
 /**
  * This is the primary router for your server.
@@ -13,9 +13,9 @@ import { adminPreferencesRouter } from "./routers/admin/preferences";
  * All routers added in /api/routers should be manually added here.
  */
 export const appRouter = createTRPCRouter({
-  post: postRouter,
   feed: feedRouter,
   order: orderRouter,
+  me: meRouter,
 
   // Admin Routers
   adminOrder: adminOrderRouter,

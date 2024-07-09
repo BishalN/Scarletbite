@@ -62,7 +62,6 @@ export function MenuEditForm({
   });
 
   function onSubmit(values: z.infer<typeof MenuItemModel>) {
-    console.log("submitting", values);
     updateMenuItem.mutate(values);
   }
 
@@ -132,9 +131,7 @@ export function MenuEditForm({
             )}
           />
 
-          <Button onClick={() => console.log("submit clicked")} type="submit">
-            Submit
-          </Button>
+          <Button type="submit">Submit</Button>
         </form>
       </Form>
     </div>

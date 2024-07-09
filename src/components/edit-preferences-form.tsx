@@ -57,7 +57,6 @@ export function EditPreferenceForm({
   });
 
   function onSubmit(values: z.infer<typeof PreferenceModel>) {
-    console.log("submitting", values);
     createPreference.mutate(values);
   }
 
@@ -100,9 +99,7 @@ export function EditPreferenceForm({
             )}
           />
 
-          <Button onClick={() => console.log("submit clicked")} type="submit">
-            Submit
-          </Button>
+          <Button type="submit">Submit</Button>
         </form>
       </Form>
     </div>

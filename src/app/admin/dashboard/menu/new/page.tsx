@@ -22,7 +22,7 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-export const MenuItemModel = z.object({
+const MenuItemModel = z.object({
   name: z.string().min(3),
   description: z.string().min(5),
   price: z.coerce.number().min(1),
@@ -61,7 +61,6 @@ export default function MenuPage() {
   });
 
   function onSubmit(values: z.infer<typeof MenuItemModel>) {
-    console.log("submitting", values);
     createMenuItem.mutate(values);
   }
 
@@ -138,12 +137,7 @@ export default function MenuPage() {
                 )}
               />
 
-              <Button
-                onClick={() => console.log("submit clicked")}
-                type="submit"
-              >
-                Submit
-              </Button>
+              <Button type="submit">Submit</Button>
             </form>
           </Form>
         </div>

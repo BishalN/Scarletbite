@@ -19,12 +19,19 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
-import { type Order, OrderStatus } from "@prisma/client";
+import { OrderStatus } from "@prisma/client";
 import { useState } from "react";
 import { useToast } from "./ui/use-toast";
 import { useRouter } from "next/navigation";
 
-export const OrderUpdateButton = ({ order }: { order: Order }) => {
+export const OrderUpdateButton = ({
+  order,
+}: {
+  order: {
+    id: number;
+    status: OrderStatus;
+  };
+}) => {
   const toast = useToast();
   const router = useRouter();
   const updateOrderStatus = api.adminOrder.updateOrderStatus.useMutation({
