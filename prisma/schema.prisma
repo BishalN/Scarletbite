@@ -118,8 +118,9 @@ enum OrderStatus {
 }
 
 enum Role {
-  USER
+  SUPER // can promote and demote user from admin
   ADMIN
+  USER
 }
 
 model Preference {

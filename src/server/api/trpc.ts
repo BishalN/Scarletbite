@@ -119,7 +119,30 @@ export const adminProcedure = t.procedure.use(async ({ ctx, next }) => {
     where: { id: ctx.session.user.id },
   });
 
-  if (!user || user.role != "ADMIN") {
+  // if the user is not an admin or super user throw unauthorized i.e user is user
+  if (!user || user.role === "USER") {
+    throw new TRPCError({ code: "UNAUTHORIZED" });
+  }
+
+  return next({
+    ctx: {
+      // infers the `session` as non-nullable
+      session: { ...ctx.session, user: ctx.session.user },
+    },
+  });
+});
+
+export const superProcedure = t.procedure.use(async ({ ctx, next }) => {
+  if (!ctx.session || !ctx.session.user) {
+    throw new TRPCError({ code: "UNAUTHORIZED" });
+  }
+
+  // TODO: this could be actually inside of the session we add it there
+  const user = await ctx.db.user.findFirst({
+    where: { id: ctx.session.user.id },
+  });
+
+  if (!user || user.role !== "SUPER") {
     throw new TRPCError({ code: "UNAUTHORIZED" });
   }
 
